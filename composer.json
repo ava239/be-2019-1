@@ -1,0 +1,28 @@
+{
+  "name": "ava/resalecalc",
+  "type": "library",
+  "description": "Resale calculator",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ava",
+      "email": "ava239@yandex.ru"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Calc\\": "src",
+      "Calc\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit tests",
+    "phpcs": "phpcs"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.5",
+    "phpunit/phpunit": "^9.4"
+  }
+}
