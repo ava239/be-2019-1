@@ -10,14 +10,19 @@ class LossTest extends TestCase
 
     /**
      * @dataProvider dataProvider
+     * @param  int[]  $input
+     * @param  int  $result
      */
-    public function testCalcLoss($input, $result)
+    public function testCalcLoss(array $input, int $result): void
     {
         $calc = new ResaleCalculator();
         $this->assertEquals($result, $calc->calculateLowestLoss($input));
     }
 
-    public function dataProvider()
+    /**
+     * @return array[]
+     */
+    public function dataProvider(): array
     {
         $long = [];
         for ($i = 0; $i < 1000; $i += 1) {

@@ -4,11 +4,15 @@ namespace Calc;
 
 class ResaleCalculator
 {
+    /**
+     * @param  int[] $prices
+     * @return int
+     */
     public function calculateLowestLoss(array $prices): int
     {
-        $lowest = max($prices);
+        $lowest = max($prices) ?: 0;
         foreach ($prices as $buyDay => $buyPrice) {
-            for ($i = $buyDay + 1; $i < count($prices); $i += 1) {
+            for ($i = $buyDay + 1, $days = count($prices); $i < $days; $i += 1) {
                 $diff = $buyPrice - $prices[$i];
                 if ($buyPrice > $prices[$i] && $diff < $lowest) {
                     $lowest = $diff;
