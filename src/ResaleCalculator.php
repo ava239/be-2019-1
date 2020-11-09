@@ -10,18 +10,16 @@ class ResaleCalculator
      */
     public function calculateLowestLoss(array $prices): int
     {
-        $lowest = max($prices) ?: 0;
-        foreach ($prices as $buyDay => $buyPrice) {
-            for ($i = $buyDay + 1, $days = count($prices); $i < $days; $i += 1) {
-                $diff = $buyPrice - $prices[$i];
-                if ($buyPrice > $prices[$i] && $diff < $lowest) {
-                    $lowest = $diff;
-                }
-                if ($buyPrice < $lowest) {
-                    $lowest = $buyPrice;
-                }
-            }
-        }
+        $lowest = min($prices) ?: 0;
+        $days = array_keys($prices);
+        $lowest = array_reduce($days, function ($acc, $day) use ($prices) {
+            $buyPrice = $prices[$day];
+            $otherDays = array_slice($prices, $day + 1);
+            return array_reduce($otherDays, function ($low, $dayPrice) use ($buyPrice) {
+                $diff = $buyPrice - $dayPrice;
+                return ($buyPrice > $dayPrice && $diff < $low) ? $diff : $low;
+            }, $acc);
+        }, $lowest);
 
         return $lowest;
     }
